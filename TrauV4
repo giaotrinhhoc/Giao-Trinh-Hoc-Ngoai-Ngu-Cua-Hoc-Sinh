@@ -2675,7 +2675,7 @@ local Window = Fluent:CreateWindow({
 })
 
 local Tabs = {
-    Wl = Window:AddTab({ Title = "Tab Chào", Icon = "" }),
+    Wl = Window:AddTab({ Title = "Giới Thiệu", Icon = "" }),
     Main = Window:AddTab({ Title = "Chung", Icon = "" }),
     stack = Window:AddTab({ Title = "Vật Phẩm", Icon = "" }), 
     St = Window:AddTab({ Title = "Trạng Thái", Icon = "" }),    
