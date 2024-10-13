@@ -1968,7 +1968,7 @@ if game.PlaceId == 2753915549 then
                 NameQuest = "HauntedQuest1"
                 NameMon = "Living Zombie"
                 CFrameQuest = CFrame.new(-9481, 142, 5565)
-                CFrameMon = CFrame.new(-10104, 200, 5739)
+                CFrameMon = CFrame.new(-10144, 140, 5932)
             elseif MyLevel == 2025 or MyLevel <= 2049 then
                 Mon = "Demonic Soul"
                 LevelQuest = 1
