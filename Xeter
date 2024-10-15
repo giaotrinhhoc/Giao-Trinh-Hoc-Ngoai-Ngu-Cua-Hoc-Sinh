@@ -5994,6 +5994,50 @@ local MaterialsPos1 = CFrame.new(-507.7895202636719, 72.99479675292969, -126.456
 end
   
 if World2 then  
+
+    M:Toggle("Auto Farm Ectoplasm",_G.Ectoplasm,function(V)
+        _G.Ectoplasm = V
+        StopTween(_G.Ectoplasm)
+    end)
+    
+    spawn(function()
+        pcall(function()
+            while wait() do
+                if _G.Ectoplasm then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Ship Deckhand" or v.Name == "Ship Engineer" or v.Name == "Ship Steward" or v.Name == "Ship Officer" then
+                                repeat task.wait()
+                                    EquipWeapon(_G.SelectWeapon)
+                                    AutoHaki()
+                                    if string.find(v.Name,"Ship") then
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        topos(v.HumanoidRootPart.CFrame * Pos)
+                                        EctoplasmMon = v.HumanoidRootPart.CFrame
+                                        StartEctoplasmMagnet = true
+                                    else
+                                        StartEctoplasmMagnet = false
+                                        topos(CFrame.new(911.35827636719, 125.95812988281, 33159.5390625))
+                                    end
+                                until _G.Ectoplasm == false or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    else
+                        topos(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))                         
+                        StartEctoplasmMagnet = false
+                        local Distance = (Vector3.new(911.35827636719, 125.95812988281, 33159.5390625) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                        if Distance > 18000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                        end
+                        topos(CFrame.new(911.35827636719, 125.95812988281, 33159.5390625))
+                    end
+                end
+            end
+        end)
+    end)
+    
 M:Toggle("Auto Farm Mystic Droplet",false,function(V)
 _G.Makori_gay = V
 StopTween(_G.Makori_gay)
@@ -6820,6 +6864,7 @@ end
         end
     end)
     
+if World1 then
     M:Label("Sea 1")
     
     M:Seperator("Saw")
@@ -7177,7 +7222,9 @@ local PolePos = CFrame.new(-7748.0185546875, 5606.80615234375, -2305.89868164062
             end
         end
     end)
+end
     
+if World2 then
     M:Label("Sea 2")
     
     M:Seperator("Legendary Sword")
@@ -7430,51 +7477,6 @@ local PolePos = CFrame.new(-7748.0185546875, 5606.80615234375, -2305.89868164062
         end)
     end)
     
-    M:Seperator("Ectoplasm")
-    
-    M:Toggle("Auto Farm Ectoplasm",_G.Ectoplasm,function(V)
-        _G.Ectoplasm = V
-        StopTween(_G.Ectoplasm)
-    end)
-    
-    spawn(function()
-        pcall(function()
-            while wait() do
-                if _G.Ectoplasm then
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == "Ship Deckhand" or v.Name == "Ship Engineer" or v.Name == "Ship Steward" or v.Name == "Ship Officer" then
-                                repeat task.wait()
-                                    EquipWeapon(_G.SelectWeapon)
-                                    AutoHaki()
-                                    if string.find(v.Name,"Ship") then
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Head.CanCollide = false
-                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                        topos(v.HumanoidRootPart.CFrame * Pos)
-                                        EctoplasmMon = v.HumanoidRootPart.CFrame
-                                        StartEctoplasmMagnet = true
-                                    else
-                                        StartEctoplasmMagnet = false
-                                        topos(CFrame.new(911.35827636719, 125.95812988281, 33159.5390625))
-                                    end
-                                until _G.Ectoplasm == false or not v.Parent or v.Humanoid.Health <= 0
-                            end
-                        end
-                    else
-                        topos(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))                         
-                        StartEctoplasmMagnet = false
-                        local Distance = (Vector3.new(911.35827636719, 125.95812988281, 33159.5390625) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                        if Distance > 18000 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
-                        end
-                        topos(CFrame.new(911.35827636719, 125.95812988281, 33159.5390625))
-                    end
-                end
-            end
-        end)
-    end)
-    
     M:Seperator("Rengoku")
     
     M:Toggle("Auto Rengoku",_G.Rengoku,function(V)
@@ -7569,9 +7571,11 @@ local PolePos = CFrame.new(-7748.0185546875, 5606.80615234375, -2305.89868164062
             end
         end
     end)
+end
     
+if World3 then
     M:Label("Sea 3")
-    
+   
     M:Seperator("Rip Indra")
     
     M:Toggle("Auto Rip_Indra True",_G.DarkDagger,function(V)
@@ -8820,6 +8824,7 @@ spawn(function()
             end
         end
     end)
+end
     
     spawn(function()
         while task.wait() do
@@ -9565,7 +9570,6 @@ end)
   V4:Button("Buy Ancient One Quest",function(t)
   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer('UpgradeRace','Buy')
   end)
-end
 
 V4:Seperator("Kill Player Trial")
 
@@ -9716,7 +9720,13 @@ end)
             end)
         end
     end)
+end
 --------------------------------------------------------------------------------------------------------
+    if World1 or World2 then
+E:Label("Go To The Third Sea")
+end
+    
+if World3 then
     E:Button("Remove Fog",function()
          game:GetService("Lighting").LightingLayers:Destroy()
      	game:GetService("Lighting").Sky:Destroy()
@@ -10924,6 +10934,7 @@ spawn(function()
         end)
     end
 end)
+end
 --------------------------------------------------------------------------------------------------------
 V:Seperator("ESP MENU")
 
