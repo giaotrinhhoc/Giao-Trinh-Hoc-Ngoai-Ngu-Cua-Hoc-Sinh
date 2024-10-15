@@ -4292,7 +4292,7 @@ end)
     
     PosY = 25
     
-    Kill_At = 28
+    Kill_At = 65
 -------------------------------------------------------------------------------------------------------
 local A = Update:Window("Min Gaming","")
 local I = A:T("Tab Status","rbxassetid://10734984606")
