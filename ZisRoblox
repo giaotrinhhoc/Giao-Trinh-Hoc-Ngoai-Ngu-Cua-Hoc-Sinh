@@ -4201,7 +4201,7 @@ I:Seperator("Vào Discord")
 
 I:Label("Mọi Người Vào Giao Lưu")
 I:Button("Sao Chép Link Discord",function()
-setclipboard("https://discord.com/invite/hcJ8PHtkfy") 
+setclipboard("https://discord.gg/cBtSkX7j") 
 end)
 
 I:Seperator("Thời Gian")
@@ -4305,6 +4305,11 @@ end)
             end)
         end
     end)
+    
+I:Label("Hỗ Trợ Script")
+I:Button("Sao Chép Link Discord",function()
+setclipboard("https://discord.com/invite/hcJ8PHtkfy") 
+end)
 --------------------------------------------------------------------------------------------------------
 Mn:Seperator("Vũ Khí")
 
