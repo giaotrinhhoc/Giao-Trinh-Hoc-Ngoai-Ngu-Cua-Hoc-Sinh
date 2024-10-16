@@ -59,29 +59,25 @@ spawn(function()
     end
 end)
 
-local EffectSea = true
-
-if EffectSea then
-    spawn(function()
-        for _, v in pairs(game:GetDescendants()) do
-            if v:IsA('Texture') then
-                v.Texture = ''
-            elseif v:IsA('BasePart') and v.Material == Enum.Material.Water then
-                v.Material = Enum.Material.SmoothPlastic
-            end
+spawn(function()
+    for _, v in pairs(game:GetDescendants()) do
+        if v:IsA('Texture') then
+            v.Texture = ''
+        elseif v:IsA('BasePart') and v.Material == Enum.Material.Water then
+            v.Material = Enum.Material.SmoothPlastic
         end
-        
-        for _, v in pairs(r33_33arg.LocalPlayer.PlayerScripts:GetDescendants()) do
-            local v641_args = {
-                'WaterBlur', 'WaterEffect', 'WaterColorCorrection', 
-                'WaterCFrame', 'MirageFog'
-            }
-            if table.find(v641_args, v.Name) then
-                v:Destroy()
-            end
+    end
+    
+    for _, v in pairs(r33_33arg.LocalPlayer.PlayerScripts:GetDescendants()) do
+        local v641_args = {
+            'WaterBlur', 'WaterEffect', 'WaterColorCorrection', 
+            'WaterCFrame', 'MirageFog'
+        }
+        if table.find(v641_args, v.Name) then
+            v:Destroy()
         end
-    end)
-end
+    end
+end)
 ----------------------------------------------------------------------------------------------------------------------------------------
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -5474,6 +5470,46 @@ end)
         end
     end
 end)
+
+St:Toggle("Fps Boost", false, function(V)
+    fpsBoostEnabled = V
+    if fpsBoostEnabled then
+        cleanlag()
+    end
+end)
+
+local fpsBoostEnabled = false
+
+function cleanlag()
+    spawn(function()
+        for _, v in pairs(workspace:GetDescendants()) do
+            if v.ClassName == 'Part' 
+            or v.ClassName == 'SpawnLocation' 
+            or v.ClassName == 'WedgePart' 
+            or v.ClassName == 'Terrain' then
+                v.Material = 'Plastic'
+            end
+        end
+        for _, v in pairs(game:GetDescendants()) do 
+            if v:IsA('Texture') then
+                v.Texture = ''
+            elseif v:IsA('BasePart') then
+                v.Material = 'Plastic'
+            end 
+        end 
+        for _, v in pairs(Players.LocalPlayer.PlayerScripts:GetDescendants()) do
+            local unwantedScripts = {
+                'RecordMode', 'Fireflies', 'Wind', 'WindShake', 'WindLines', 
+                'WaterBlur', 'WaterEffect', 'wave', 'WaterColorCorrection', 
+                'WaterCFrame', 'MirageFog', 'MobileButtonTransparency', 
+                'WeatherStuff', 'AnimateEntrance', 'Particle', 'AccessoryInvisible'
+            }
+            if table.find(unwantedScripts, v.Name) then
+                v:Destroy()
+            end
+        end
+    end)
+end
     
     St:Seperator("Setting Farm Mastery")
     
