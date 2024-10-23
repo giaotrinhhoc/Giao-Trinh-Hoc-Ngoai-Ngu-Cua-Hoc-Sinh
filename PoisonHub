@@ -3577,6 +3577,15 @@ local S = A:T("Tab Shop","rbxassetid://10734952479")
 local D = A:T("Tab Devil Fruit","rbxassetid://10709761889")
 local Mc = A:T("Tab Miscellaneous","rbxassetid://10709782582")
 --------------------------------------------------------------------------------------------------------
+I:Seperator("Join Discord")
+
+I:Label("Script Created By Xeter Hub")
+
+I:Label("Everyone Goes Into Socialize")
+I:Button("Copy Discord Link",function()
+setclipboard("https://discord.com/invite/hcJ8PHtkfy") 
+end)
+
 I:Seperator("Time")
 
 Time = I:Label("Executer Time")
