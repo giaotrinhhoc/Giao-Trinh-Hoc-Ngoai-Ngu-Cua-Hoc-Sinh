@@ -4723,60 +4723,61 @@ spawn(function()
                     if game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then
                         topos(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
                     else
-                        if KillMob == 0 then
-                        end
+                        if KillMob == 0 then end
                         if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0 and (CFrame.new(-1990.672607421875, 4532.99951171875, -14973.6748046875).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 500 then
                             topos(CFrame.new(-2151.82153, 149.315704, -12404.9053))
                         else
-                            local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
-                            if not string.find(QuestTitle, "Cookie Crafter") then
-                                CakeBring = false
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                            end
-                            if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                                CakeBring = false
-                                if BypassTP then
-                                    if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeQuestPos.Position).Magnitude > 3500 then
-                                        BTP(CakeQuestPos)
-                                    elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeQuestPos.Position).Magnitude < 3500 then
+                            if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 1 then
+                                local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+                                if not string.find(QuestTitle, "Cookie Crafter") then
+                                    CakeBring = false
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                end
+                                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                                    CakeBring = false
+                                    if BypassTP then
+                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CakeQuestPos.Position).Magnitude > 3500 then
+                                            BTP(CakeQuestPos)
+                                        else
+                                            topos(CakeQuestPos)
+                                        end
+                                    else
                                         topos(CakeQuestPos)
                                     end
-                                else
-                                    topos(CakeQuestPos)
-                                end
-                                if (CakeQuestPos.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 then
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", "CakeQuest1", 1)
-                                end
-                            elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                                if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Guard") or game:GetService("Workspace").Enemies:FindFirstChild("Baking Staff") or game:GetService("Workspace").Enemies:FindFirstChild("Head Baker") then
-                                    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                        if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                            if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
-                                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Cookie Crafter") then
-                                                    repeat
-                                                        wait()
-                                                        EquipWeapon(_G.SelectWeapon)
-                                                        AutoHaki()
-                                                        PosMonCake = v.HumanoidRootPart.CFrame
-                                                        topos(v.HumanoidRootPart.CFrame * Pos)
-                                                        v.HumanoidRootPart.CanCollide = false
-                                                        v.Humanoid.WalkSpeed = 0
-                                                        v.Head.CanCollide = false
-                                                        v.HumanoidRootPart.Size = Vector3.new(70, 70, 70)
-                                                        CakeBring = true
-                                                        PosMonDoughtOpenDoor = v.HumanoidRootPart.CFrame
-                                                    until not _G.DoughtBoss or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or v.Humanoid.Health <= 0 or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0 or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or KillMob == 0
-                                                else
-                                                    CakeBring = false
-                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                    if (CakeQuestPos.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 then
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", "CakeQuest1", 1)
+                                    end
+                                elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                                    if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Guard") or game:GetService("Workspace").Enemies:FindFirstChild("Baking Staff") or game:GetService("Workspace").Enemies:FindFirstChild("Head Baker") then
+                                        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                                if v.Name == "Cookie Crafter" or v.Name == "Cake Guard" or v.Name == "Baking Staff" or v.Name == "Head Baker" then
+                                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Cookie Crafter") then
+                                                        repeat
+                                                            wait()
+                                                            EquipWeapon(_G.SelectWeapon)
+                                                            AutoHaki()
+                                                            PosMonCake = v.HumanoidRootPart.CFrame
+                                                            topos(v.HumanoidRootPart.CFrame * Pos)
+                                                            v.HumanoidRootPart.CanCollide = false
+                                                            v.Humanoid.WalkSpeed = 0
+                                                            v.Head.CanCollide = false
+                                                            v.HumanoidRootPart.Size = Vector3.new(70, 70, 70)
+                                                            CakeBring = true
+                                                            PosMonDoughtOpenDoor = v.HumanoidRootPart.CFrame
+                                                        until not _G.DoughtBoss or not v.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or v.Humanoid.Health <= 0 or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Other.Transparency == 0 or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or KillMob == 0
+                                                    else
+                                                        CakeBring = false
+                                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                                    end
                                                 end
                                             end
                                         end
-                                    end
-                                else
-                                    CakeBring = false
-                                    if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
-                                        topos(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(15, 10, 2))
+                                    else
+                                        CakeBring = false
+                                        if game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter") then
+                                            topos(game:GetService("ReplicatedStorage"):FindFirstChild("Cookie Crafter").HumanoidRootPart.CFrame * CFrame.new(15, 10, 2))
+                                        end
                                     end
                                 end
                             end
