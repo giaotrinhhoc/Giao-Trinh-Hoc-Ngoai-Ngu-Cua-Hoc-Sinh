@@ -13286,9 +13286,9 @@ end)
 --------------------------------------------------------------------------------------------------------
 local players = game:GetService("Players")
 game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Xeter & Min Gaming";
+    Title = "Min Gaming";
     Text = "Tải Hoàn Tất!";
-    Icon = "rbxthumb://type=Asset&id=9614132122&w=150&h=150";
+    Icon = "rbxthumb://type=Asset&id=13717478897&w=150&h=150";
     Duration = 10
 })
 
