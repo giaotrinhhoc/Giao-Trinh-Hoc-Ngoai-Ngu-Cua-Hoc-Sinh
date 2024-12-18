@@ -18,7 +18,7 @@ if not game.CoreGui:FindFirstChild("ThunderScreen") then
     ThunderToggleUI.Name = "ThunderToggleUI"
     ThunderToggleUI.Parent = ThunderScreen
     ThunderToggleUI.BackgroundColor3 = Color3.fromRGB(244, 244, 0)
-    ThunderToggleUI.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+    ThunderToggleUI.Position = UDim2.new(0.5, -75, 0.0952890813, 0)  -- Đã căn giữa
     ThunderToggleUI.Size = UDim2.new(0, 150, 0, 30)
     ThunderToggleUI.Font = Enum.Font.SourceSansSemibold
     ThunderToggleUI.Text = "Copy Discord Link"
